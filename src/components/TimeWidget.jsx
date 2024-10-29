@@ -19,7 +19,7 @@ const TimeWidget = () => {
       <div className="text-7xl font-semibold">
         {time.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
       </div>
-      <div className="text-xl mt-2">{currentDate}</div>
+      <div className="text-xl mt-2 text-green-500">{currentDate}</div>
     </div>
   );
 };

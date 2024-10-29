@@ -45,7 +45,7 @@ export default function TimeDate() {
         <p className="text-2xl  font-quick tracking-wider">{time}</p>
       </div>
       <div className="flex justify-end">
-        <p className="text-gray-600 font-quick text-lg">
+        <p className="text-gray-200 font-quick text-lg">
           {weekday}, {monthName} {dateNum}
         </p>
       </div>

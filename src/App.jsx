@@ -19,22 +19,23 @@ export default function App() {
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
-        <div className="h-screen w-screen text-gray-300 bg-stone-700 grid grid-cols-6 gap-[2rem]">
+        <div className="h-screen w-screen text-gray-300 bg-black grid grid-cols-6 gap-[2rem]">
           <div className="col-span-2">
-            <SpeechComponent />
+            <div className="flex flex-row m-[2rem]">
+              <Weather />
+            </div>
           </div>
 
           <div className=" col-span-2">2</div>
 
-          <div className="grid grid-rows-5 col-span-2 justify-center">
-            <div className="flex flex-row pt-[2rem]">
-              <Weather />
+          <div className="grid grid-rows-5 col-span-2 justify-center max-h-screen">
+            <div className="flex flex-row pt-[2rem] justify-end">
               <TimeDate />
             </div>
             <div className="row-span-3">
               <Greet />
             </div>
-            <div>
+            <div className="">
               <Music />
             </div>
           </div>
