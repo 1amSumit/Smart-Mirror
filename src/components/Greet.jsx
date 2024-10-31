@@ -17,7 +17,7 @@ export default function Greet() {
   return (
     <div className="flex flex-col gap-2 px-4 overflow-hidden">
       <motion.h2
-        className="text-6xl font-bold font-quick"
+        className="text-5xl p-2 font-bold font-quick"
         initial={{ x: 0, opacity: 1 }}
         animate={{
           x: [0, 100, -100, 0],

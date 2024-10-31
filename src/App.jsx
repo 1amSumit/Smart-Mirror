@@ -19,7 +19,7 @@ export default function App() {
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
-        <div className="h-screen w-screen text-gray-300 bg-black grid grid-cols-6 gap-[2rem]">
+        <div className="h-screen w-screen text-gray-300 bg-gradient-to-r from-gray-500 to-gray-900 grid grid-cols-6 gap-[2rem]">
           <div className="col-span-2">
             <div className="flex flex-row m-[2rem]">
               <Weather />
