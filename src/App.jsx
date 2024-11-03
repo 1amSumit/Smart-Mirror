@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { getSongs } from "./services/spotifyMusic";
 import SpeechComponent from "./components/SpeechComponent";
+import News from "./components/News";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -32,8 +33,9 @@ export default function App() {
             <div className="flex flex-row pt-[2rem] justify-end">
               <TimeDate />
             </div>
-            <div className="row-span-3">
+            <div className="row-span-3  px-4">
               <Greet />
+              <News />
             </div>
             <div className="">
               <Music />
