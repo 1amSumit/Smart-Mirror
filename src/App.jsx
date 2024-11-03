@@ -20,20 +20,20 @@ export default function App() {
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
-        <div className="h-screen w-screen text-gray-300 bg-gradient-to-r from-gray-500 to-gray-900 grid grid-cols-6 gap-[2rem]">
+        <div className="h-screen w-full text-gray-300 bg-gradient-to-r from-gray-500 to-gray-900 grid grid-cols-7 gap-[2rem]">
           <div className="col-span-2">
             <div className="flex flex-row m-[2rem]">
               <Weather />
             </div>
           </div>
 
-          <div className=" col-span-2">2</div>
+          <div className=" col-span-3">2</div>
 
           <div className="grid grid-rows-5 col-span-2 justify-center max-h-screen">
             <div className="flex flex-row pt-[2rem] justify-end">
               <TimeDate />
             </div>
-            <div className="row-span-3  px-4">
+            <div className="row-span-3  px-4 oveflow-hidden">
               <Greet />
               <News />
             </div>
