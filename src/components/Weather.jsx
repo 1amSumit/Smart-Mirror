@@ -3,6 +3,8 @@ import { BsCloudSun } from "react-icons/bs";
 import { useCurrentLocation } from "../hooks/useCurrentLocation";
 import { useQuery } from "@tanstack/react-query";
 import { getCurrentWeather } from "../services/getCurrentWeather";
+import { useRecoilState } from "recoil";
+import { todoTransition } from "../store/newsAndTodoState";
 
 export default function Weather() {
   const { latitude, longitude } = useCurrentLocation();
@@ -12,6 +14,8 @@ export default function Weather() {
     queryFn: () => getCurrentWeather(latitude, longitude),
     enabled: !!latitude && !!longitude,
   });
+
+  const [tx, setTX] = useRecoilState(todoTransition);
 
   return (
     <div className="flex flex-col px-[2rem]">
@@ -41,7 +45,10 @@ export default function Weather() {
             </svg>
           )}
           {data && (
-            <p className="text-4xl">
+            <p
+              className="text-4xl cursor-pointer"
+              onClick={() => setTX((prev) => !prev)}
+            >
               <span>{Math.round(data.main.temp)}</span>
               <span>°C</span>
             </p>

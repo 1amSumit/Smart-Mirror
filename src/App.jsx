@@ -1,14 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Weather from "./components/Weather";
 import TimeDate from "./components/TimeDate";
 import Greet from "./components/Greet";
-import { RecoilRoot } from "recoil";
+import { RecoilRoot, useRecoilValue } from "recoil";
 import Music from "./components/Music";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { getSongs } from "./services/spotifyMusic";
-import SpeechComponent from "./components/SpeechComponent";
-import News from "./components/News";
+import Transition from "./components/Transition";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -20,7 +19,7 @@ export default function App() {
     <RecoilRoot>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
-        <div className="h-screen w-full text-gray-300 bg-gradient-to-r from-gray-500 to-gray-900 grid grid-cols-7 gap-[2rem]">
+        <div className="h-screen w-full text-gray-300 bg-gradient-to-r from-gray-500 to-gray-900 grid grid-cols-7 gap-[2rem] overflow-hidden">
           <div className="col-span-2">
             <div className="flex flex-row m-[2rem]">
               <Weather />
@@ -35,7 +34,7 @@ export default function App() {
             </div>
             <div className="row-span-3  px-4 oveflow-hidden">
               <Greet />
-              <News />
+              <Transition />
             </div>
             <div className="">
               <Music />

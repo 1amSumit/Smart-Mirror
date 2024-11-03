@@ -32,7 +32,13 @@ export default function News() {
   }
 
   return (
-    <div className="overflow-hidden w-[100%]">
+    <motion.div
+      initial={{ x: -100, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: 100, opacity: 0 }}
+      transition={{ duration: 0.5 }}
+      className="overflow-hidden w-[100%]"
+    >
       <div className="mt-2">
         <p className="font-bold text-lg">Top Events</p>
       </div>
@@ -46,6 +52,6 @@ export default function News() {
           <p className="w-full">{data.articles[currentIndex].description}</p>
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 }
