@@ -12,15 +12,10 @@ import { transcriptState, useVoiceToSpeech } from "./store/voiceState";
 export default function App() {
   const queryClient = new QueryClient();
   const { isListening, transcript, startListening, stopListening } =
-    useVoiceToSpeech({ lang: "en-US", continuous: true });
-
-  useEffect(() => {
-    startListening();
-
-    return () => {
-      stopListening();
-    };
-  }, []);
+    useVoiceToSpeech({
+      lang: "en-US",
+      continuous: true,
+    });
 
   return (
     <RecoilRoot>

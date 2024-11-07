@@ -1,63 +1,54 @@
-import React, { useContext, useEffect, useRef } from "react";
-import { VoiceContext } from "../components/voiceProvider";
+import { useEffect, useRef, useState } from "react";
 
-export function useVoiceToSpeech(options = {}) {
-  const { isListening, setIsListening, transcript, setTranscript } =
-    useContext(VoiceContext);
+export default function useVoiceToSpeech(options = {}) {
+  const [isListening, setIsListening] = useState(false);
+  const [transcript, setTranscript] = useState("");
   const regRef = useRef(null);
 
   useEffect(() => {
     if (!("webkitSpeechRecognition" in window)) {
-      console.log("Web Speech API is not supported by this browser.");
+      console.log("Web speech API is not supported");
       return;
     }
 
     regRef.current = new window.webkitSpeechRecognition();
     const recognition = regRef.current;
 
-    // recognition.interimResults = options.interimResults ?? true;
+    recognition.interimResults = options.interimResults ?? true;
     recognition.lang = options.lang || "en-US";
-    recognition.continuous = options.continuous || false;
+    recognition.continuous = options.continuous ?? false;
 
     if ("webkitSpeechGrammarList" in window) {
       const grammar =
         "#JSGF V1.0; grammar punctuation; public <punc> = . | , | ! | : | ;";
-      const speechRecognitionList = new window.webkitSpeechGrammarList();
+      const speechRecognitionList = new window.webkitSpeechGrammarList(); //
       speechRecognitionList.addFromString(grammar, 1);
       recognition.grammars = speechRecognitionList;
     }
 
     recognition.onresult = (event) => {
-      setTranscript((text) => {
-        for (let i = 0; i < event.results.length; i++) {
-          text += event.results[i][0].transcript;
-        }
-        return text;
-      });
+      let text = "";
+      for (let i = 0; i < event.results.length; i++) {
+        text += event.results[i][0].transcript;
+      }
+      setTranscript(text);
     };
 
     recognition.onerror = (event) => {
       console.log("Speech recognition error: ", event.error);
-      setIsListening(false);
     };
 
     recognition.onend = () => {
-      // setIsListening(false);
-      // if (!options.keepTranscriptOnEnd) {
-      //   setTranscript("");
-      // }
-
-      if (options.continuous && isListening) {
-        recognition.start();
+      setIsListening(false);
+      if (!options.keepTranscriptOnEnd) {
+        setTranscript("");
       }
     };
 
     return () => {
-      if (recognition) {
-        recognition.stop();
-      }
+      recognition.stop();
     };
-  }, [options, setTranscript, setIsListening, isListening]);
+  }, [options]);
 
   const startListening = () => {
     if (regRef.current && !isListening) {
