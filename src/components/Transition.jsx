@@ -9,6 +9,9 @@ import { transcriptState, useVoiceToSpeech } from "../store/voiceState";
 export default function Transition() {
   const showTodo = useRecoilValue(todoTransition);
 
+  const [txs, setTxs] = useRecoilState(transcriptState);
+  console.log(txs);
+
   return (
     <AnimatePresence>
       {!showTodo ? <News key="news" /> : <Todo key="todo" />}

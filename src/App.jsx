@@ -7,19 +7,12 @@ import Music from "./components/Music";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Transition from "./components/Transition";
-import {
-  currentTranscriptState,
-  transcriptState,
-  useVoiceToSpeech,
-} from "./store/voiceState";
+import { transcriptState, useVoiceToSpeech } from "./store/voiceState";
 
 export default function App() {
   const queryClient = new QueryClient();
   const { isListening, transcript, startListening, stopListening } =
     useVoiceToSpeech({ lang: "en-US", continuous: true });
-
-  console.log(isListening);
-  console.log(transcript);
 
   useEffect(() => {
     startListening();
@@ -40,7 +33,13 @@ export default function App() {
             </div>
           </div>
 
-          <div className="col-span-3">2</div>
+          <div className="col-span-3 flex flex-col justify-between">
+            <div></div>
+            <div></div>
+            <div>
+              <p className="text-xl py-2 px-2 font-semibold">{transcript}</p>
+            </div>
+          </div>
 
           <div className="grid grid-rows-5 col-span-2 justify-center max-h-screen">
             <div className="flex flex-row pt-[2rem] justify-end">

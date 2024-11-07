@@ -10,10 +10,6 @@ export const transcriptState = atom({
   key: "transcriptState",
   default: "",
 });
-export const currentTranscriptState = atom({
-  key: "transcriptState",
-  default: "",
-});
 
 export function useVoiceToSpeech(options = {}) {
   const [isListening, setIsListening] = useRecoilState(isListeningState);
@@ -22,7 +18,7 @@ export function useVoiceToSpeech(options = {}) {
 
   useEffect(() => {
     if (!("webkitSpeechRecognition" in window)) {
-      console.log("Web speech API is not supported");
+      console.log("Web Speech API is not supported by this browser.");
       return;
     }
 
@@ -51,6 +47,7 @@ export function useVoiceToSpeech(options = {}) {
 
     recognition.onerror = (event) => {
       console.log("Speech recognition error: ", event.error);
+      setIsListening(false);
     };
 
     recognition.onend = () => {
@@ -58,10 +55,16 @@ export function useVoiceToSpeech(options = {}) {
       if (!options.keepTranscriptOnEnd) {
         setTranscript("");
       }
+
+      if (options.continuous && isListening) {
+        recognition.start();
+      }
     };
 
     return () => {
-      recognition.stop();
+      if (recognition) {
+        recognition.stop();
+      }
     };
   }, [options, setTranscript, setIsListening]);
 
