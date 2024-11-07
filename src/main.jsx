@@ -3,9 +3,12 @@ import { createRoot } from "react-dom/client";
 import App from "./App.jsx";
 import "regenerator-runtime/runtime";
 import "./index.css";
+import { RecoilRoot } from "recoil";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <RecoilRoot>
+      <App />
+    </RecoilRoot>
   </StrictMode>
 );
