@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { BsPlay, BsPause, BsShuffle } from "react-icons/bs";
+import { useRecoilState } from "recoil";
+import { transcriptState } from "../store/voiceState";
 
 const songs = [
   { id: 2, path: "/songs/a-2.mp3" },
@@ -16,6 +18,30 @@ export default function Music() {
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
+
+  const [transcript, setTranscript] = useRecoilState(transcriptState);
+
+  useEffect(() => {
+    setTranscript("");
+
+    console.log(transcript);
+
+    if (transcript.includes("play") || transcript.includes("pl ay")) {
+      playSong();
+    }
+    if (transcript.includes("pause") || transcript.includes("pause")) {
+      pauseSong();
+    }
+    if (transcript.includes("shuffle") || transcript.includes("shu ffle")) {
+      shuffleSong();
+    }
+    if (transcript.includes("next") || transcript.includes("ne xt")) {
+      playNextSong();
+    }
+    if (transcript.includes("previous") || transcript.includes("pre vious")) {
+      playPreviousSong();
+    }
+  }, [transcript]);
 
   const playSong = () => {
     audioRef.current.play();
