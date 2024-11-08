@@ -1,32 +1,24 @@
-import { useEffect } from "react";
-import { useVoiceToSpeech } from "../hooks/useVoiceToSpeech";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { todoTransition } from "../store/newsAndTodoState";
 import { AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 import News from "./News";
 import Todo from "./Todo";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { transcriptState } from "../store/voiceState";
 
 export default function Transition() {
-  const [showTodo, setShowTodo] = useRecoilState(todoTransition);
-  const { isListening, transcript, startListening, stopListening } =
-    useVoiceToSpeech({
-      lang: "en-US",
-      continuous: true,
-    });
+  const [showTodo, setShowTodo] = useState(false);
+  const [transcript, setTranscript] = useRecoilState(transcriptState);
 
   useEffect(() => {
-    if (transcript.includes("todo") || transcript.includes("to do")) {
+    setTranscript("");
+    if (transcript.includes("to") || transcript.includes("to do")) {
       setShowTodo(true);
     }
+
+    if (transcript.includes("news") || transcript.includes("ne ws")) {
+      setShowTodo(false);
+    }
   }, [transcript]);
-
-  useEffect(() => {
-    startListening();
-
-    return () => {
-      stopListening();
-    };
-  }, [startListening, stopListening]);
 
   return (
     <AnimatePresence>

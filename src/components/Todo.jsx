@@ -14,8 +14,8 @@ export default function Todo() {
         <p className="text-xl font-bold">Todo</p>
       </div>
       <div className="mt-1">
-        {todos.map((todo) => (
-          <div className="flex flex-row items-center gap-2">
+        {todos.map((todo, i) => (
+          <div key={i} className="flex flex-row items-center gap-2">
             <input type="checkbox" />
             <p>{todo}</p>
           </div>

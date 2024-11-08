@@ -9,9 +9,7 @@ import { VoiceProvider } from "./components/voiceProvider.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <RecoilRoot>
-      <VoiceProvider>
-        <App />
-      </VoiceProvider>
+      <App />
     </RecoilRoot>
   </StrictMode>
 );
