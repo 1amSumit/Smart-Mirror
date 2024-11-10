@@ -25,13 +25,13 @@ export default function Todo() {
     setTranscript("");
     console.log(transcript);
 
-    if (transcript.includes("add ")) {
-      const task = transcript.split("add ")[1];
+    if (transcript.includes("add todo")) {
+      const task = transcript.split("add todo ")[1];
       setTodos([{ task, checked: false }, ...todos]);
     }
 
-    if (transcript.includes("remove ")) {
-      const removeTask = transcript.split("remove ")[1].toLowerCase();
+    if (transcript.includes("remove todo")) {
+      const removeTask = transcript.split("remove todo ")[1].toLowerCase();
       const taskIndex = todos.findIndex((todo) => todo.task === removeTask);
       // setTodos(todos.filter((_, i) => i !== taskIndex));
       toggleCheckbox(taskIndex);
