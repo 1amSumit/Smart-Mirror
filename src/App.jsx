@@ -54,9 +54,7 @@ export default function App() {
           <div>
             <p className="text-xl py-2 px-2 font-semibold">{transcript}</p>
           </div> */}
-          <div className="App">
-            <VirtualFittingRoom />
-          </div>
+          <div className="App">{/* <VirtualFittingRoom /> */}</div>
         </div>
 
         <div className="grid grid-rows-5 col-span-2 justify-center max-h-screen">
