@@ -32,7 +32,6 @@ export default function Events() {
         ]);
       }
     } else if (transcript.includes("remove event ")) {
-      //   const eventToRemoveMatch = transcript.match(/remove event (\d+)/i);
       const removeEventTimeMatch = transcript.match(/at (\d+:\d+)/i);
       const removeEventTitleMatch = transcript.match(
         /remove event (.+?) at \d+:\d+/i
@@ -45,8 +44,6 @@ export default function Events() {
       );
 
       setEvents(events.filter((_, i) => i !== eventIndex));
-
-      console.log(eventIndex);
     }
   }, [transcript, setTranscript]);
 

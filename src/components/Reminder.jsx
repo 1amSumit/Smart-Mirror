@@ -1,37 +1,60 @@
 import { useState, useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { transcriptState } from "../store/voiceState";
 
-// interface Reminder {
-//   message: string
-//   actions?: {
-//     confirm: string
-//     cancel: string
-//   }
-// }
+const iniReminders = [
+  {
+    message:
+      "It looks like you'll be late again on your design meet. Would you like to go with Uber?",
+  },
+  {
+    message: "Don't forget your daily standup in 10 minutes!",
+  },
+  {
+    message: "Your project deadline is approaching. 2 days remaining.",
+  },
+];
 
-export default function Reminder({
-  reminders = [
-    {
-      message:
-        "It looks like you'll be late again on your design meet. Would you like to go with Uber?",
-      //   actions: {
-      //     confirm: "YES, CALL UBER",
-      //     cancel: "NO, THANKS",
-      //   },
-    },
-    {
-      message: "Don't forget your daily standup in 10 minutes!",
-    },
-    {
-      message: "Your project deadline is approaching. 2 days remaining.",
-      //   actions: {
-      //     confirm: "VIEW PROJECT",
-      //     cancel: "DISMISS",
-      //   },
-    },
-  ],
-}) {
+export default function Reminder() {
+  const [reminders, setReminders] = useState(iniReminders);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isSliding, setIsSliding] = useState(false);
+
+  const [transcript, setTranscript] = useRecoilState(transcriptState);
+
+  useEffect(() => {
+    setTranscript("transcript");
+    console.log(transcript);
+
+    if (transcript.includes("add reminder ")) {
+      const newReminder = transcript.split("add reminder ")[1];
+      setReminders([...reminders, { message: newReminder }]);
+    } else if (transcript.includes("remove reminder ")) {
+      const reminderToRemove = transcript
+        .split("remove reminder ")[1]
+        .toLowerCase();
+      const reminderIndex = reminders.findIndex(
+        (remin) => remin.message === reminderToRemove
+      );
+
+      console.log(reminderToRemove);
+      console.log(reminderIndex);
+
+      setReminders(reminders.filter((_, i) => i !== reminderIndex));
+    }
+  }, [transcript]);
+
+  useEffect(() => {
+    const savedReminders =
+      JSON.parse(localStorage.getItem("reminders")) || iniReminders;
+    setReminders(savedReminders);
+  }, []);
+
+  useEffect(() => {
+    if (reminders.length > 0) {
+      localStorage.setItem("reminers", JSON.stringify(reminders));
+    }
+  }, [reminders]);
 
   useEffect(() => {
     const timer = setInterval(() => {
