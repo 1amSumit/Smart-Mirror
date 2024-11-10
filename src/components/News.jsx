@@ -94,10 +94,10 @@ export default function News() {
       transition={{ duration: 0.5 }}
       className="overflow-hidden w-[100%]"
     >
-      <div className="mt-2">
-        <p className="font-bold text-lg">Top Events</p>
+      <div className="mt-4">
+        <p className="uppercase text-sm font-quick font-semibold">Top Events</p>
       </div>
-      <div className="flex flex-row gap-1 overflow-hidden mt-1">
+      <div className="flex flex-row gap-1 overflow-hidden mt-6">
         <motion.div
           key={currentIndex}
           animate={{ x: [100, 0] }}

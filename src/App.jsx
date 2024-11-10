@@ -11,6 +11,8 @@ import { transcriptState } from "./store/voiceState";
 import { useVoiceToSpeech } from "./hooks/useVoice";
 import AvatarCamera from "./components/avatar";
 import VirtualFittingRoom from "./components/VirtualFittingRoom";
+import Reminder from "./components/Reminder";
+import Events from "./components/Events";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -33,10 +35,16 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
-      <div className="h-screen w-full text-gray-300 bg-gradient-to-r from-gray-500 to-gray-800 grid grid-cols-7 gap-[2rem] overflow-hidden">
-        <div className="col-span-2">
+      <div className="h-screen w-full text-gray-300 bg-black grid grid-cols-7 gap-[2rem] overflow-hidden">
+        <div className="col-span-2 flex flex-col justify-between">
           <div className="flex flex-row m-[2rem]">
             <Weather />
+          </div>
+          <div>
+            <Reminder />
+          </div>
+          <div>
+            <Events />
           </div>
         </div>
 
@@ -47,16 +55,6 @@ export default function App() {
             <p className="text-xl py-2 px-2 font-semibold">{transcript}</p>
           </div> */}
           <div className="App">
-            <h1
-              style={{
-                position: "absolute",
-                zIndex: 1,
-                color: "white",
-                padding: "10px",
-              }}
-            >
-              Smart Mirror AR
-            </h1>
             <VirtualFittingRoom />
           </div>
         </div>
