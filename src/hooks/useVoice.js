@@ -28,6 +28,14 @@ export function useVoiceToSpeech(options = {}) {
         recognition.grammars = speechRecognitionList;
       }
 
+      recognition.onspeechstart = () => {
+        console.log("Speech has started.");
+      };
+
+      recognition.onspeechend = () => {
+        console.log("Speech has ended.");
+      };
+
       recognition.onresult = (event) => {
         let text = "";
         for (let i = 0; i < event.results.length; i++) {

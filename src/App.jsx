@@ -9,6 +9,8 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import Transition from "./components/Transition";
 import { transcriptState } from "./store/voiceState";
 import { useVoiceToSpeech } from "./hooks/useVoice";
+import AvatarCamera from "./components/avatar";
+import VirtualFittingRoom from "./components/VirtualFittingRoom";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -38,11 +40,24 @@ export default function App() {
           </div>
         </div>
 
-        <div className="col-span-3 flex flex-col justify-between">
-          <div></div>
-          <div></div>
+        <div className="col-span-3  justify-between">
+          <div>{/* <AvatarCamera /> */}</div>
+          {/* <div></div>
           <div>
             <p className="text-xl py-2 px-2 font-semibold">{transcript}</p>
+          </div> */}
+          <div className="App">
+            <h1
+              style={{
+                position: "absolute",
+                zIndex: 1,
+                color: "white",
+                padding: "10px",
+              }}
+            >
+              Smart Mirror AR
+            </h1>
+            <VirtualFittingRoom />
           </div>
         </div>
 

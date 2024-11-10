@@ -24,8 +24,6 @@ export default function Music() {
   useEffect(() => {
     setTranscript("");
 
-    console.log(transcript);
-
     if (transcript.includes("play") || transcript.includes("pl ay")) {
       playSong();
     }
@@ -81,7 +79,7 @@ export default function Music() {
   }, [currentSongIndex]);
 
   return (
-    <div className="p-4 rounded-lg shadow-md max-w-md mx-auto ring-2 ring-gray-600">
+    <div className="p-4 rounded-lg shadow-md max-w-md mx-auto ">
       <div className="text-xs text-gray-500 mb-2">Music</div>
       <div className="flex items-center">
         <img
