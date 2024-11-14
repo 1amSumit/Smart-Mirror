@@ -28,7 +28,7 @@ export default function Reminder() {
 
     if (transcript.includes("add reminder ")) {
       const newReminder = transcript.split("add reminder ")[1];
-      setReminders([...reminders, { message: newReminder }]);
+      setReminders([{ message: newReminder }, ...reminders]);
     } else if (transcript.includes("remove reminder ")) {
       const reminderToRemove = transcript
         .split("remove reminder ")[1]

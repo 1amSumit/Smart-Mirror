@@ -17,7 +17,7 @@ export default function News() {
   });
 
   useEffect(() => {
-    // setTranscript("");
+    setTranscript("");
     console.log(transcript);
     if (
       transcript.includes("start top news") ||
@@ -25,8 +25,8 @@ export default function News() {
     ) {
       handlePlay();
     } else if (
-      transcript.includes("stop top news") ||
-      transcript.includes(" stop top news")
+      transcript.includes("pause top news") ||
+      transcript.includes(" pause top news")
     ) {
       handleStop();
     }
